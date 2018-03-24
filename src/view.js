@@ -1,0 +1,71 @@
+//Object that writes the todo list data to the DOM
+var view = {
+  render: function() {
+    todoContainer.innerHTML = "";//sets DOM to blank
+    var todos = todoList.todos; //sets todos equal to todos array in todolist.js
+
+
+    todos.forEach(function(todo, pos){ //parses the todo array and creates an li for each item
+      var li = document.createElement('li'); //writes li data to DOM
+      //li.innerHTML = todo.todoText; //sets text to text in todo array
+      li.id = pos; //adds pos id for toggle & delete functions
+      li.classList.add("list-item"); //adds list-item class for toggle function
+
+      if (todo.completed){//short hand- checks if todo.completed == true
+        li.classList.add('item-completed');//adds text strikethrough in css if completed = true
+      }
+
+      var span = document.createElement('span');//stores the actual todoText in a span which is appended to the parentNode <li>
+      span.innerHTML = todo.todoText;//sets contents of the span to todo.todoText
+      span.classList.add('todo-text');//adds the 'todo-text' class to the span which is used as identification by the click eventListener in script.js to update the todoText
+
+      var input = document.createElement('input');//creates an input box element on each todo which is hidden from view in the .css
+      input.value = todo.todoText;//sets the contents of the input text to todo.todoText
+      input.classList.add('edit-text');//adds the 'edit-text' class to 'input' for id in .css and
+      input.addEventListener('blur', view.deselectEdit);//calls the 'deselectEdit' function in view.js when the target is unfocused'
+      input.addEventListener('keypress', view.updateTodo);
+
+      var toggleButton = document.createElement('button');//creates button
+      toggleButton.innerHTML = "✔"; //adds a checkmark to the button. check mark found by google search of "ascii checkmark"
+      toggleButton.classList.add('toggle-button');//adds class to button for .css use and id via click eventListener in script.js
+
+      var deleteTodoButton = document.createElement('button'); //creates button
+      deleteTodoButton.innerHTML = "delete"; //adds text to button
+      deleteTodoButton.classList.add('delete-button'); //adds class to button for .css use and id via click eventListener in script.js
+
+      li.appendChild(input);//appends input to each <li>
+      li.appendChild(span);//appends 'span' to each <li>
+      li.appendChild(toggleButton);//appends the toggle button to each <li>
+      li.appendChild(deleteTodoButton); //appends button to each li created
+      todoContainer.appendChild(li); //appends button to each li created in todoContainer
+
+
+    });
+  },
+  deleteTodo: function(pos) {//removes a todo based off click position listed in event listener in script.js
+    todoList.remove(pos);//calls function in todolist.js
+    this.render();//calls render function and writes data to DOM
+  },
+  toggleTodo: function(pos) {//adds item-completed class a todo based off click position listed in event listener in script.js
+    todoList.toggle(pos);//calls function in todolist.js
+    this.render();//calls render function and writes data to DOM
+   },
+   editTodo: function(targetParent){//edits the text in a todo
+     targetParent.classList.add('edit');//adds the 'edit' class for use in .css which then hides the span and replaces it with the input class
+     var input = targetParent.querySelector('input');//declares the the variable passed to the function from the eventListener in script.js is equal to 'input'
+     input.focus();//focuses the target input for use with the updateTodo function in view.js when key 13 (Enter) is pressed
+     input.setSelectionRange(0, input.value.length)//automatically highlights the text in todo
+   },
+   deselectEdit: function(e){//deselects a todo and reverts the .css
+     e.target.parentNode.classList.remove('edit');//removes the 'edit' class from the parentNode <li> which reverts the .css for the 'input' and 'span' classes to their normal state ***This will not cause the text in a todo to update! Key 13 (Enter) must be pressed for that to happen***
+   },
+   updateTodo: function(e){//updates the text in a todo item
+     if (e.keyCode === 13){//key code for the Enter key. Can be found in the console
+       todoList.update(e.target.parentNode.id, e.target.value);//calls todoList.update function in todoList.js and passes it the target parentNode id <li> and the targets value (the current text in the span) and replaces it with the new text typed into the input
+       e.target.blur();//blurs/unfocuses the target
+       view.render();//calls view.render to update the text in the DOM after key 13 is pressed
+     }else {
+       return;//seems inefficient but is actually very efficient for checking for keypress. this function will fire after every single key press when updating a todo
+     }
+   }
+}
