@@ -1,6 +1,5 @@
-import './test.js';
-import './script.js';
 import './todolist.js';
+import './script.js';
 import './view.js';
 
-console.log('Jimmy cloned the repo');
+console.log('All files finished without breaking errors');

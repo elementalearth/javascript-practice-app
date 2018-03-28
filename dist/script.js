@@ -1398,19 +1398,9 @@ process.chdir = function (dir) {
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
-require('./todolist.js');
-
-require('./script.js');
-
-require('./view.js');
-
-console.log('All files finished without breaking errors');
-}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_e3d19639.js","/")
-},{"./script.js":6,"./todolist.js":7,"./view.js":8,"buffer":2,"pBGvAp":4}],6:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 window.todoContainer = document.querySelector('#todoContainer'); //links data to DOM
 
-todoContainer.addEventListener('click', function(e) {
+todoContainer.addEventListener('click', function (e) {
   //adds eventlistener to DOM and looks for a click event. passes click event into function as 'e'
   var targetClasses = e.target.classList; //var that simplifies target id and reduces typing out extra lines for event if statements
 
@@ -1439,134 +1429,5 @@ todoList.toggle(0);
 // todoContainer.appendChild(li);
 
 view.render(); //calls view.render to push data to DOM
-
-}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/script.js","/")
-},{"buffer":2,"pBGvAp":4}],7:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-// Creates the Todo list and sets completed to false for each todo in the array
-window.todoList = {
-  todos: [],
-  print: function(caller) {
-    if (this.todos.length === 0) {
-      console.log('You have no todos');
-    } else {
-      console.log(caller + ': ');
-      for (var i = 0; i < this.todos.length; i++) {
-        if (this.todos[i].completed === false) {
-          console.log('( ) ' + this.todos[i].todoText);
-        } else {
-          console.log('(x) ' + this.todos[i].todoText);
-        }
-      }
-    }
-  },
-  // Adds a todo at the end of the array and sets completed to false
-  add: function(todoText) {
-    this.todos.push({
-      todoText: todoText,
-      completed: false,
-    });
-  },
-  //Removes a todo when the 'delete' button is pressed
-  remove: function(pos) {
-    //position of the parentNode which comes from the delete-button click eventListener in script.js
-    this.todos.splice(pos, 1); //cuts out the <li> at only (pos, 1) the position clicked in the array
-  },
-  // Updates a todo
-  update: function(pos, newText) {
-    //all new inputs are stored in newText
-    this.todos[pos].todoText = newText; //sets todoText as equal to newText
-    this.print('Updated a todo');
-  },
-  // Toggles the 'completed' element when the li is clicked
-  toggle: function(pos) {
-    this.todos[pos].completed = !this.todos[pos].completed; //flips completed class when function is called
-    this.print('Toggled a todo');
-  },
-};
-
-console.log('todoList end');
-console.log(todoList);
-
-}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/todolist.js","/")
-},{"buffer":2,"pBGvAp":4}],8:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-//Object that writes the todo list data to the DOM
-window.view = {
-  render: function() {
-    todoContainer.innerHTML = ''; //sets DOM to blank
-    var todos = todoList.todos; //sets todos equal to todos array in todolist.js
-
-    todos.forEach(function(todo, pos) {
-      //parses the todo array and creates an li for each item
-      var li = document.createElement('li'); //writes li data to DOM
-      //li.innerHTML = todo.todoText; //sets text to text in todo array
-      li.id = pos; //adds pos id for toggle & delete functions
-      li.classList.add('list-item'); //adds list-item class for toggle function
-
-      if (todo.completed) {
-        //short hand- checks if todo.completed == true
-        li.classList.add('item-completed'); //adds text strikethrough in css if completed = true
-      }
-
-      var span = document.createElement('span'); //stores the actual todoText in a span which is appended to the parentNode <li>
-      span.innerHTML = todo.todoText; //sets contents of the span to todo.todoText
-      span.classList.add('todo-text'); //adds the 'todo-text' class to the span which is used as identification by the click eventListener in script.js to update the todoText
-
-      var input = document.createElement('input'); //creates an input box element on each todo which is hidden from view in the .css
-      input.value = todo.todoText; //sets the contents of the input text to todo.todoText
-      input.classList.add('edit-text'); //adds the 'edit-text' class to 'input' for id in .css and
-      input.addEventListener('blur', view.deselectEdit); //calls the 'deselectEdit' function in view.js when the target is unfocused'
-      input.addEventListener('keypress', view.updateTodo);
-
-      var toggleButton = document.createElement('button'); //creates button
-      toggleButton.innerHTML = '✔'; //adds a checkmark to the button. check mark found by google search of "ascii checkmark"
-      toggleButton.classList.add('toggle-button'); //adds class to button for .css use and id via click eventListener in script.js
-
-      var deleteTodoButton = document.createElement('button'); //creates button
-      deleteTodoButton.innerHTML = 'delete'; //adds text to button
-      deleteTodoButton.classList.add('delete-button'); //adds class to button for .css use and id via click eventListener in script.js
-
-      li.appendChild(input); //appends input to each <li>
-      li.appendChild(span); //appends 'span' to each <li>
-      li.appendChild(toggleButton); //appends the toggle button to each <li>
-      li.appendChild(deleteTodoButton); //appends button to each li created
-      todoContainer.appendChild(li); //appends button to each li created in todoContainer
-    });
-  },
-  deleteTodo: function(pos) {
-    //removes a todo based off click position listed in event listener in script.js
-    todoList.remove(pos); //calls function in todolist.js
-    this.render(); //calls render function and writes data to DOM
-  },
-  toggleTodo: function(pos) {
-    //adds item-completed class a todo based off click position listed in event listener in script.js
-    todoList.toggle(pos); //calls function in todolist.js
-    this.render(); //calls render function and writes data to DOM
-  },
-  editTodo: function(targetParent) {
-    //edits the text in a todo
-    targetParent.classList.add('edit'); //adds the 'edit' class for use in .css which then hides the span and replaces it with the input class
-    var input = targetParent.querySelector('input'); //declares the the variable passed to the function from the eventListener in script.js is equal to 'input'
-    input.focus(); //focuses the target input for use with the updateTodo function in view.js when key 13 (Enter) is pressed
-    input.setSelectionRange(0, input.value.length); //automatically highlights the text in todo
-  },
-  deselectEdit: function(e) {
-    //deselects a todo and reverts the .css
-    e.target.parentNode.classList.remove('edit'); //removes the 'edit' class from the parentNode <li> which reverts the .css for the 'input' and 'span' classes to their normal state ***This will not cause the text in a todo to update! Key 13 (Enter) must be pressed for that to happen***
-  },
-  updateTodo: function(e) {
-    //updates the text in a todo item
-    if (e.keyCode === 13) {
-      //key code for the Enter key. Can be found in the console
-      todoList.update(e.target.parentNode.id, e.target.value); //calls todoList.update function in todoList.js and passes it the target parentNode id <li> and the targets value (the current text in the span) and replaces it with the new text typed into the input
-      e.target.blur(); //blurs/unfocuses the target
-      view.render(); //calls view.render to update the text in the DOM after key 13 is pressed
-    } else {
-      return; //seems inefficient but is actually very efficient for checking for keypress. this function will fire after every single key press when updating a todo
-    }
-  },
-};
-
-}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/view.js","/")
+}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4160d466.js","/")
 },{"buffer":2,"pBGvAp":4}]},{},[5])
