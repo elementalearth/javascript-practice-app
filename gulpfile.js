@@ -7,7 +7,7 @@ gulp.task('watcher', function(){
 });
 
 gulp.task("scripts", function () {
-  return gulp.src("src/*.js")
+  return gulp.src("src/app.js")
     .pipe(babel({presets: ['env']}))
     .pipe(browserify({
           insertGlobals : true,
