@@ -1,3 +1,5 @@
+// NOT CURRENTLY WORKING, WE ARE USING PARCEL.JS
+
 var gulp = require('gulp');
 var babel = require('gulp-babel');
 var browserify = require('gulp-browserify');
@@ -11,11 +13,6 @@ gulp.task('scripts', function() {
   return gulp
     .src('src/app.js')
     .pipe(babel())
-    .pipe(
-      browserify({
-        insertGlobals: true,
-      })
-    )
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest('dist/'));
 });
