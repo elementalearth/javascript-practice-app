@@ -1,5 +1,5 @@
 // Creates the Todo list and sets completed to false for each todo in the array
-window.todoList = {
+var todoList = {
   todos: [],
   print: function(caller) {
     if (this.todos.length === 0) {
@@ -40,5 +40,4 @@ window.todoList = {
   },
 };
 
-console.log('todoList end');
-console.log(todoList);
+export default todoList;

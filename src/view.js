@@ -1,5 +1,7 @@
+import todoList from './todolist';
+
 //Object that writes the todo list data to the DOM
-window.view = {
+var view = {
   render: function() {
     todoContainer.innerHTML = ''; //sets DOM to blank
     var todos = todoList.todos; //sets todos equal to todos array in todolist.js
@@ -74,3 +76,5 @@ window.view = {
     }
   },
 };
+
+export default view;
