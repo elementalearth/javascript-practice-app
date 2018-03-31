@@ -2,10 +2,12 @@ import todoList from './todolist';
 
 //Object that writes the todo list data to the DOM
 var view = {
-  render: function() {
+  init: function() {
     this.cacheDOM();
     this.bindClick();
+  },
 
+  render: function() {
     this.todoContainer.innerHTML = ''; //sets DOM to blank
     var todos = todoList.todos; //sets todos equal to todos array in todolist.js
 
@@ -106,5 +108,7 @@ var view = {
     }
   },
 };
+
+view.init();
 
 export default view;
