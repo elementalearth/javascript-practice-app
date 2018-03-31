@@ -1,0 +1,85 @@
+body{
+  font-family:sans-serif;
+}
+
+body, *{
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size:22px;
+  text-align:center;
+  color: white;
+  margin: 0 0 10px;
+}
+
+.todoWrapper {
+  list-style: none;
+  padding: 10px 15px;
+  border-radius:5px;
+  background: linear-gradient(45deg, #2ecc71, #3498db);
+}
+
+ul {
+  list-style: none;
+  padding: 0px 0px;
+
+}
+
+.list-item {
+  background:rgba(255, 255, 255, 0.5);
+  border-radius:3px;
+  margin-bottom: 5px;
+  padding:3px 7px;
+  color:#333;
+  font-size:14px;
+
+  button {
+    float: right;
+    font-size: 10px;
+    border: none;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  input {
+    display: none;
+    font-size: 14px;
+    padding: 3px 3px 3px 10px;
+    max-width: 120px;
+    max-height: 26px;
+  }
+
+  span {
+    display: inline-block;
+    font-size: 14px;
+    padding: 6px 3px 6px 10px;
+    max-height: 26px;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  &.item-completed span{
+    text-decoration: line-through;
+  }
+
+  &.edit input {
+    display:inline-block;
+  }
+
+  &.edit span {
+    display:none; /*hides the span from view*/
+  }
+
+}
+
+.delete-button {
+  background-color: salmon;
+}
+
+.toggle-button {
+  background-color: aquamarine;
+}
