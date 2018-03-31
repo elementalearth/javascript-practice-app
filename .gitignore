@@ -1,3 +1,6 @@
+# Dist folder, combiled by parcel/gulp
+dist
+
 # Logs
 logs
 *.log
