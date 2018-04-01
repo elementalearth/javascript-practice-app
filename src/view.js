@@ -54,7 +54,7 @@ var view = {
   },
 
   bindClick: function() {
-    todoContainer.addEventListener('click', function(e) {
+    this.todoContainer.addEventListener('click', function(e) {
       //adds eventlistener to DOM and looks for a click event. passes click event into function as 'e'
       var targetClasses = e.target.classList; //var that simplifies target id and reduces typing out extra lines for event if statements
 

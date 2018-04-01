@@ -1,5 +1,4 @@
 // Creates the Todo list and sets completed to false for each todo in the array
-// (function() {
 
 var todoList = {
   todos: [],
@@ -55,6 +54,5 @@ var todoList = {
 };
 
 todoList.init();
-// })()
 
 export default todoList;
