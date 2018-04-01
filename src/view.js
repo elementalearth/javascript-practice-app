@@ -38,7 +38,7 @@ var view = {
       toggleButton.classList.add('toggle-button'); //adds class to button for .css use and id via click eventListener in script.js
 
       var deleteTodoButton = document.createElement('button'); //creates button
-      deleteTodoButton.innerHTML = 'delete'; //adds text to button
+      deleteTodoButton.innerHTML = 'X'; //adds text to button
       deleteTodoButton.classList.add('delete-button'); //adds class to button for .css use and id via click eventListener in script.js
 
       li.appendChild(input); //appends input to each <li>
@@ -54,7 +54,7 @@ var view = {
   },
 
   bindClick: function() {
-    todoContainer.addEventListener('click', function(e) {
+    this.todoContainer.addEventListener('click', function(e) {
       //adds eventlistener to DOM and looks for a click event. passes click event into function as 'e'
       var targetClasses = e.target.classList; //var that simplifies target id and reduces typing out extra lines for event if statements
 
