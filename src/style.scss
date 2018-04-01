@@ -1,24 +1,19 @@
+// FONTS
+@import url('https://fonts.googleapis.com/css?family=MedievalSharp|IM+Fell+English');
+$font-medieval: 'MedievalSharp', cursive;
+$font-fell: 'IM Fell English', serif;
+
+// BASE
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body,
 * {
   box-sizing: border-box;
-}
-
-h1 {
-  font-size: 22px;
-  text-align: center;
-  color: white;
-  margin: 0 0 10px;
-}
-
-.todoWrapper {
-  list-style: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  background: linear-gradient(45deg, #2ecc71, #3498db);
+  font-family: $font-fell;
 }
 
 ul {
@@ -26,44 +21,104 @@ ul {
   padding: 0px 0px;
 }
 
+header {
+  padding: 1rem 2rem;
+  background-image: linear-gradient(190deg, #30cfd0 0%, #330867 100%);
+  text-align: center;
+
+  h1 {
+    margin: 0;
+    font-family: $font-medieval;
+    color: #106d86;
+    color: #fff;
+  }
+}
+
+footer {
+  padding: 1rem 2rem;
+  background-image: linear-gradient(190deg, #325a92 0%, #330867 100%);
+
+  span {
+    color: #987ae1;
+  }
+}
+
+.prime-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  background-color: #f2f2f2;
+  min-height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+
+.todoWrapper {
+  flex: 1;
+  max-width: 600px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-image: linear-gradient(15deg, #32508d 0%, #31a5ba 100%);
+
+  h2 {
+    font-size: 22px;
+    text-align: center;
+    color: #fff;
+    margin: 0 0 10px;
+  }
+}
+
 .list-item {
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 3px;
-  margin-bottom: 5px;
-  padding: 3px 7px;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.5rem;
   color: #333;
-  font-size: 14px;
 
   input {
     display: none;
-    font-size: 14px;
+    flex: 1;
+    margin-right: 1rem;
+    font-size: 18px;
     padding: 3px 3px 3px 10px;
-    max-width: 120px;
-    max-height: 26px;
   }
 
   span {
-    display: inline-block;
-    font-size: 14px;
+    flex: 1;
+    margin-right: 1rem;
+    font-size: 18px;
     padding: 6px 3px 6px 10px;
-    max-height: 26px;
     line-height: 1;
     vertical-align: middle;
   }
 
   button {
-    float: right;
-    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 5px;
+    font-size: 14px;
     border: none;
     color: white;
-    padding: 2px 10px;
-    border-radius: 3px;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
     font-weight: bold;
   }
 
   &.edit input {
-    display: inline-block;
+    display: block;
   }
 
   &.edit span {
@@ -77,9 +132,9 @@ ul {
 }
 
 .delete-button {
-  background-color: salmon;
+  background-color: #f36858;
 }
 
 .toggle-button {
-  background-color: aquamarine;
+  background-color: #3afbba;
 }
