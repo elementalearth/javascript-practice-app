@@ -55,13 +55,25 @@ footer {
 .content {
   display: flex;
   flex: 1;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   padding: 2rem 1rem;
 }
 
+.swapiWrapper {
+  background-color: #fff;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 50px;
+  padding: 10px 15px;
+  box-shadow: 0 0 2px #ccc;
+  border-radius: 5px;
+}
+
 .todoWrapper {
-  flex: 1;
+  flex: 0;
+  width: 100%;
   max-width: 600px;
   padding: 10px 15px;
   border-radius: 5px;
