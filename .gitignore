@@ -1,6 +1,9 @@
 # Dist folder, combiled by parcel/gulp
 dist
 
+# Cache
+.cache/
+
 # Logs
 logs
 *.log
